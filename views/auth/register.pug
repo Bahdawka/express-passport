@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .auth-container
+    .auth-form
+      h1 Реєстрація
+      
+      if error
+        .error-message #{error}
+      
+      form(method='POST' action='/auth/register')
+        .form-group
+          label(for='username') Ім'я користувача:
+          input(type='text' id='username' name='username' required)
+        
+        .form-group  
+          label(for='email') Email:
+          input(type='email' id='email' name='email' required)
+        
+        .form-group
+          label(for='password') Пароль:
+          input(type='password' id='password' name='password' required minlength='6')
+        
+        .form-group
+          label(for='confirmPassword') Підтвердіть пароль:
+          input(type='password' id='confirmPassword' name='confirmPassword' required minlength='6')
+        
+        button.btn(type='submit') Зареєструватися
+      
+      .auth-links
+        p Вже маєте акаунт? 
+          a(href='/auth/login') Увійти

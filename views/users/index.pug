@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  .page-header
+    h1 #{title}
+    p Всього користувачів: #{users.length}
+  
+  .users-grid
+    each user in users
+      .user-card
+        .user-avatar
+          span #{user.name.charAt(0)}
+        .user-info
+          h3 #{user.name}
+          p.user-email
+            strong Email: 
+            | #{user.email}
+          p.user-details
+            strong Вік: 
+            | #{user.age} років
+          p.user-details
+            strong Місто: 
+            | #{user.city}
+          .user-actions
+            a.btn.btn-primary(href=`/users/${user.id}`) Детальніше
+    
+  .back-link
+    a(href='/') ← Назад на головну

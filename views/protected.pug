@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  .protected-container
+    .protected-content
+      h1 Захищена сторінка
+      
+      .welcome-section
+        h2 Вітаємо, #{user.username}!
+        p Це захищена сторінка, доступ до якої мають тільки авторизовані користувачі.
+        
+      .user-info
+        h3 Інформація про користувача:
+        ul
+          li
+            strong ID: 
+            span #{user.id}
+          li
+            strong Ім'я користувача: 
+            span #{user.username}
+          li
+            strong Email: 
+            span #{user.email}
+          li
+            strong Роль: 
+            span #{user.role}
+      
+      .protected-actions
+        h3 Доступні дії:
+        .actions-grid
+          a.action-card(href='/auth/profile')
+            h4 Мій профіль
+            p Переглянути та редагувати профіль
+          
+          a.action-card(href='/users')
+            h4 Користувачі
+            p Переглянути список користувачів
+          
+          a.action-card(href='/articles')
+            h4 Статті
+            p Переглянути статті
+          
+          if user.role === 'admin'
+            a.action-card(href='/settings')
+              h4 Налаштування
+              p Адміністративні налаштування
+      
+      .session-info
+        h3 Інформація про сесію:
+        p Ви успішно авторизовані через Passport.js з використанням Express Sessions
+        p Ваша сесія захищена httpOnly cookies та буде активна протягом 24 годин
+      
+      .navigation-links
+        a.btn.btn-primary(href='/') Повернутися на головну
+        form.inline-form(method='POST' action='/auth/logout')
+          button.btn.btn-secondary(type='submit') Вийти

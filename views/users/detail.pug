@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  .page-header
+    h1 #{title}
+  
+  .user-detail-card
+    .user-avatar-large
+      span #{userDetail.name.charAt(0)}
+    .user-details-full
+      h2 #{userDetail.name}
+      .detail-row
+        strong Email: 
+        span #{userDetail.email}
+      .detail-row
+        strong Вік: 
+        span #{userDetail.age} років
+      .detail-row
+        strong Місто: 
+        span #{userDetail.city}
+      .detail-row
+        strong ID: 
+        span ##{userDetail.id}
+  
+  .action-buttons
+    a.btn.btn-secondary(href='/users') ← Назад до списку

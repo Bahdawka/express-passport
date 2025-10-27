@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .profile-container
+    .profile-header
+      h2 Профіль користувача
+    
+    .profile-info
+      .user-details
+        h3 Інформація про користувача
+        p
+          strong Ім'я користувача: 
+          | #{user.username}
+        p
+          strong Email: 
+          | #{user.email}
+        p
+          strong ID: 
+          | #{user.id}
+      
+      .profile-actions
+        a.btn.btn-primary(href='/settings') Налаштування
+        form.logout-form(method='POST', action='/auth/logout')
+          button.btn.btn-danger(type='submit') Вийти

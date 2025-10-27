@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .error-page
+    .error-container
+      .error-code 404
+      h1.error-title Сторінка не знайдена
+      p.error-message Вибачте, але сторінка, яку ви шукаете, не існує.
+      
+      .error-suggestions
+        h3 Можливо, ви шукали:
+        ul
+          li
+            a(href='/') Головну сторінку
+          li
+            a(href='/articles') Список статей
+          if user
+            li
+              a(href='/users') Список користувачів
+          else
+            li
+              a(href='/auth/login') Сторінку входу
+      
+      .action-buttons
+        a.btn.btn-primary(href='/') ← Повернутися на головну

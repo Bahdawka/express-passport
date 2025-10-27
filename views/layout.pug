@@ -1,0 +1,31 @@
+doctype html
+html(lang='uk')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title #{title}
+    link(rel='icon', type='image/png', href='/favicon.png')
+    link(rel='stylesheet', href='/css/style.css')
+  body(class=(theme || 'light') + '-theme')
+    header.header
+      nav.navbar
+        .nav-left
+          a(href='/') Головна
+          if user
+            a(href='/users') Користувачі
+            a(href='/protected') Захищена сторінка
+          a(href='/articles') Статті
+        .nav-right
+          if user
+            a(href='/auth/profile') #{user.username}
+            form.inline-form(method='POST' action='/auth/logout')
+              button.logout-btn(type='submit') Вийти
+          else
+            a(href='/auth/login') Увійти
+            a(href='/auth/register') Реєстрація
+    
+    main.main-content
+      block content
+    
+    footer.footer
+      p &copy; 2025 Express App з PUG та EJS

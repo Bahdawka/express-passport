@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="<%= (theme || 'light') %>-theme">
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="/">Головна</a>
+                <% if (user) { %>
+                    <a href="/users">Користувачі</a>
+                    <a href="/protected">Захищена сторінка</a>
+                <% } %>
+                <a href="/articles">Статті</a>
+            </div>
+            <div class="nav-right">
+                <% if (user) { %>
+                    <a href="/auth/profile"><%= user.username %></a>
+                    <form class="inline-form" method="POST" action="/auth/logout">
+                        <button class="logout-btn" type="submit">Вийти</button>
+                    </form>
+                <% } else { %>
+                    <a href="/auth/login">Увійти</a>
+                    <a href="/auth/register">Реєстрація</a>
+                <% } %>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <div class="page-header">
+            <h1><%= title %></h1>
+            <p>Всього статей: <%= articles.length %></p>
+        </div>
+        
+        <div class="articles-list">
+            <% articles.forEach(function(article) { %>
+                <article class="article-card">
+                    <div class="article-header">
+                        <h3><a href="/articles/<%= article.id %>"><%= article.title %></a></h3>
+                        <span class="article-category"><%= article.category %></span>
+                    </div>
+                    <div class="article-meta">
+                        <span class="author">Автор: <%= article.author %></span>
+                        <span class="date">Дата: <%= new Date(article.publishDate).toLocaleDateString('uk-UA') %></span>
+                    </div>
+                    <div class="article-content">
+                        <p><%= article.content.substring(0, 150) %>...</p>
+                    </div>
+                    <div class="article-actions">
+                        <a href="/articles/<%= article.id %>" class="btn btn-primary">Читати далі</a>
+                    </div>
+                </article>
+            <% }) %>
+        </div>
+        
+        <div class="back-link">
+            <a href="/">← Назад на головну</a>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2025 Express App з PUG та EJS</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="<%= (theme || 'light') %>-theme">
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="/">Головна</a>
+                <% if (user) { %>
+                    <a href="/users">Користувачі</a>
+                    <a href="/protected">Захищена сторінка</a>
+                <% } %>
+                <a href="/articles">Статті</a>
+            </div>
+            <div class="nav-right">
+                <% if (user) { %>
+                    <a href="/auth/profile"><%= user.username %></a>
+                    <form class="inline-form" method="POST" action="/auth/logout">
+                        <button class="logout-btn" type="submit">Вийти</button>
+                    </form>
+                <% } else { %>
+                    <a href="/auth/login">Увійти</a>
+                    <a href="/auth/register">Реєстрація</a>
+                <% } %>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <div class="page-header">
+            <h1><%= title %></h1>
+        </div>
+        
+        <article class="article-detail">
+            <div class="article-meta-full">
+                <span class="category-badge"><%= article.category %></span>
+                <div class="meta-info">
+                    <span class="author">Автор: <strong><%= article.author %></strong></span>
+                    <span class="date">Опубліковано: <strong><%= new Date(article.publishDate).toLocaleDateString('uk-UA') %></strong></span>
+                    <span class="article-id">ID: #<%= article.id %></span>
+                </div>
+            </div>
+            
+            <div class="article-content-full">
+                <p><%= article.content %></p>
+            </div>
+            
+            <div class="article-tags">
+                <% article.tags.forEach(function(tag) { %>
+                    <span class="tag"><%= tag %></span>
+                <% }) %>
+            </div>
+        </article>
+        
+        <div class="action-buttons">
+            <a href="/articles" class="btn btn-secondary">← Назад до списку</a>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2025 Express App з PUG та EJS</p>
+    </footer>
+</body>
+</html>

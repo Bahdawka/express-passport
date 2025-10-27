@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  .settings-container
+    .settings-header
+      h2 Налаштування
+    
+    .settings-content
+      .theme-settings
+        h3 Тема оформлення
+        
+        .theme-options
+          if currentTheme === 'dark'
+            form(method='POST', action='/settings/theme')
+              input(type='hidden', name='theme', value='light')
+              button.theme-toggle.btn.btn-secondary(type='submit') 🌞 Перемкнути на світлу тему
+          else  
+            form(method='POST', action='/settings/theme')
+              input(type='hidden', name='theme', value='dark')
+              button.theme-toggle.btn.btn-secondary(type='submit') 🌙 Перемкнути на темну тему
+      
+      .settings-actions
+        if user
+          a.btn.btn-secondary(href='/auth/profile') Назад до профілю
+        else
+          a.btn.btn-secondary(href='/') Назад на головну
