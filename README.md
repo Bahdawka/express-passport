@@ -1,4 +1,5 @@
 # Express.js + Passport.js Authentication Project
+- Deploy link on Vercel: https://express-passport-vert.vercel.app/
 
 ## Опис проекту
 
